@@ -17,6 +17,13 @@ spec:
       containers:
         - image: '{{ .Values.fe.repository }}:{{ .Values.fe.tag }}'
           name: {{ .Values.fe.name }}
+          env:
+          - name: CLIENT_MAX_BODY_SIZE
+            value: 10M
+          - name: PROXY_READ_TIMEOUT
+            value: 60000ms
+          - name: PROXY_CONNECT_TIMEOUT
+            value: 10000ms
           ports:
             - containerPort: {{ .Values.fe.port }}
       restartPolicy: Always
